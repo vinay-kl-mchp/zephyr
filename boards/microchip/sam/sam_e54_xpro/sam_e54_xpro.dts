@@ -225,6 +225,15 @@
 			fdpll-xosc-clock-divider = <5>;
 			fdpll-en = <1>;
 		};
+
+		fdpll1 {
+			subsystem = <CLOCK_MCHP_FDPLL_ID_FDPLL1>;
+			fdpll-divider-ratio-int = <15>;
+			fdpll-lock-bypass-en = <1>;
+			fdpll-wakeup-fast-en = <1>;
+			fdpll-src = "xosc1";
+			fdpll-en = <1>;
+		};
 	};
 
 	xosc32k: xosc32k {
@@ -263,6 +272,14 @@
 			gclkgen-run-in-standby-en = <1>;
 			gclkgen-en = <1>;
 		};
+
+		gclkgen3 {
+			subsystem = <CLOCK_MCHP_GCLKGEN_ID_GEN3>;
+			gclkgen-div-factor = <2>;
+			gclkgen-src = "fdpll1";
+			gclkgen-run-in-standby-en = <1>;
+			gclkgen-en = <1>;
+		};
 	};
 
 	gclkperiph: gclkperiph {
@@ -298,6 +315,12 @@
 			gclkperiph-src = "gclk2";
 			gclkperiph-en = <0>;
 		};
+
+		usb0 {
+			subsystem = <CLOCK_MCHP_GCLKPERIPH_ID_USB>;
+			gclkperiph-src = "gclk3";
+			gclkperiph-en = <0>;
+		};
 	};
 
 	mclkperiph: mclkperiph {
@@ -306,6 +329,11 @@
 
 		sercom2 {
 			subsystem = <CLOCK_MCHP_MCLKPERIPH_ID_APBB_SERCOM2>;
+			mclk-en = <1>;
+		};
+
+		usb0 {
+			subsystem = <CLOCK_MCHP_MCLKPERIPH_ID_APBB_USB>;
 			mclk-en = <1>;
 		};
 	};
@@ -518,6 +546,12 @@ i2c0: &sercom7 {
 };
 
 &trng {
+	status = "okay";
+};
+
+zephyr_udc0: &usb0 {
+	pinctrl-0 = <&usb_dc_default>;
+	pinctrl-names = "default";
 	status = "okay";
 };
 
