@@ -153,7 +153,7 @@
 		xosc-startup-time = <500000>;
 		xosc-clock-failure-detection-en = <0>;
 		xosc-safe-clock-frequency = <48>;
-		xosc-usbhs-ref-clock-div = "usbhs-pll-ref-xosc-clock-disabled";
+		xosc-usbhs-ref-clock-div = "usbhs-pll-ref-xosc-clock-div-1";
 	};
 
 	xosc32k: xosc32k {
@@ -477,4 +477,17 @@ zephyr_udc0: &usb0 {
 		reg = <0>;
 		status = "okay";
 	};
+};
+
+&usb0 {
+	pinctrl-0 = <&usb_dc_default>;
+	pinctrl-names = "default";
+	/* USBFS disabled – USBHS (hsusb0) is used as the primary USB device
+	 * controller via the zephyr_udc0 alias below.
+	 */
+	status = "disabled";
+};
+
+zephyr_udc0: &hsusb0 {
+	status = "okay";
 };
