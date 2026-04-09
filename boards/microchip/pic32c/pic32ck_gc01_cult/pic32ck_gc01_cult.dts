@@ -34,6 +34,7 @@
 		adc0 = &adc0;
 		i2c0 = &sercom4;
 		eeprom-0 = &at24_eeprom;
+		spi0 = &sercom2;
 	};
 
 	leds {
@@ -354,6 +355,17 @@
 
 &can0 {
 	pinctrl-0 = <&can0_default>;
+	pinctrl-names = "default";
+	status = "okay";
+};
+
+&sercom2 {
+	compatible = "microchip,sercom-g1-spi";
+	dipo = <3>;
+	dopo = <0>;
+	#address-cells = <1>;
+	#size-cells = <0>;
+	pinctrl-0 = <&sercom2_spi_default>;
 	pinctrl-names = "default";
 	status = "okay";
 };
