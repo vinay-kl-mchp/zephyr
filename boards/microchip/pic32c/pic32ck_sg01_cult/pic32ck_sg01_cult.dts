@@ -295,6 +295,11 @@
 			subsystem = <CLOCK_MCHP_MCLKPERIPH_ID_USB_APB>;
 			mclk-en = <1>;
 		};
+
+		usbhs0 {
+			subsystem = <CLOCK_MCHP_MCLKPERIPH_ID_USBHS_AHB>;
+			mclk-en = <1>;
+		};
 	};
 };
 
@@ -381,12 +386,6 @@
 	status = "okay";
 };
 
-zephyr_udc0: &usb0 {
-	pinctrl-0 = <&usb_dc_default>;
-	pinctrl-names = "default";
-	status = "okay";
-};
-
 &gmac {
 	compatible = "microchip,gmac-g1-eth";
 	pinctrl-0 = <&gmac_rmii>;
@@ -409,4 +408,17 @@ zephyr_udc0: &usb0 {
 		reg = <0>;
 		status = "okay";
 	};
+};
+
+&usb0 {
+	pinctrl-0 = <&usb_dc_default>;
+	pinctrl-names = "default";
+	/* USBFS disabled – USBHS (hsusb0) is used as the primary USB device
+	 * controller via the zephyr_udc0 alias below.
+	 */
+	status = "disabled";
+};
+
+zephyr_udc0: &hsusb0 {
+	status = "okay";
 };
