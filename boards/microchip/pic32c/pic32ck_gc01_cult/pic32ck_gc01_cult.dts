@@ -22,6 +22,7 @@
 		zephyr,code-partition = &code_partition;
 		zephyr,console = &sercom5;
 		zephyr,shell-uart = &sercom5;
+		zephyr,canbus = &can0;
 	};
 
 	aliases {
@@ -349,4 +350,10 @@
 		address-width = <8>;
 		timeout = <5>;
 	};
+};
+
+&can0 {
+	pinctrl-0 = <&can0_default>;
+	pinctrl-names = "default";
+	status = "okay";
 };

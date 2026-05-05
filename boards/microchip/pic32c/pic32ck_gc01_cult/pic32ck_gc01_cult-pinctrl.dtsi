@@ -41,4 +41,11 @@
 				 <PB10C_SERCOM4_PAD1>; /* SCL */
 		};
 	};
+
+	can0_default: can0_default {
+		group1 {
+			pinmux = <PB16H_CAN0_TX>,
+				 <PB17H_CAN0_RX>;
+		};
+	};
 };
