@@ -12,7 +12,9 @@ ram: 512
 supported:
   - adc
   - clock_control
+  - eeprom
   - gpio
+  - i2c
   - pinctrl
   - rtc
   - uart
