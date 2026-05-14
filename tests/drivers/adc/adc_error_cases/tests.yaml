@@ -31,3 +31,4 @@ tests:
       - it8xxx2_evb
       - it82xx2_evb
       - pic32cx_sg61_cult
+      - pic32ck_gc01_cult
