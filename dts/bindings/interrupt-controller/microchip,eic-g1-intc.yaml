@@ -86,7 +86,7 @@ properties:
     type: int
     default: 2
     description: |
-      Number of cells in portb-special-pins-1 property
+      Number of cells in porta-special-pins-1 property
 
   portb-special-pins-1:
     type: array
