@@ -13,6 +13,7 @@ supported:
   - adc
   - can
   - clock_control
+  - counter
   - eeprom
   - gpio
   - i2c
