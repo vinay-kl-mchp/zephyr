@@ -20,6 +20,7 @@ supported:
   - hwinfo
   - interrupt_controller
   - i2c
+  - netif:eth
   - pinctrl
   - pwm
   - rtc
