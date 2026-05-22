@@ -108,4 +108,11 @@
 				 <PD13J_SPI_IXS_FSYNC>;
 		};
 	};
+
+	usb_dc_default: usb_dc_default {
+		group1 {
+			pinmux = <PD4H_USB_DP>,
+				 <PD3H_USB_DM>;
+		};
+	};
 };
