@@ -224,6 +224,7 @@ tests:
       - ek_ra8m2/r7ka8m2jflcac/cm33
       - ek_ra8t2/r7ka8t2lflcac/cm85
       - ek_ra8t2/r7ka8t2lflcac/cm33
+      - pic32cx_sg61_cult
     harness: ztest
     harness_config:
       fixture: gpio_loopback
