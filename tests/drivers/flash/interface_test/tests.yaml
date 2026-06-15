@@ -17,13 +17,14 @@ tests:
       - pic32cm_sg00_cpro
       - pic32cx_sg41_cult
       - pic32cx_sg61_cult
+      - pic32cz_ca80_cult
       - sam_e54_xpro
   drivers.flash.interface_test.build_only:
     harness: ztest
     build_only: true
     filter: CONFIG_FLASH_HAS_DRIVER_ENABLED and
-            (dt_label_with_parent_compat_enabled("slot1_partition", "fixed-partitions") or
-             dt_label_compat_enabled("slot1_partition", "zephyr,mapped-partition"))
+      (dt_label_with_parent_compat_enabled("slot1_partition", "fixed-partitions") or
+      dt_label_compat_enabled("slot1_partition", "zephyr,mapped-partition"))
     integration_platforms:
       - imx95_evk/mimx9596/m7
       - nrf54l15dk/nrf54l15/cpuapp
