@@ -45,7 +45,6 @@ tests:
       - raytac_an54lq_db_15/nrf54l15/cpuapp/ns
       - frdm_mcxw23
       - mcxw23_evk
-      - pic32cx_sg61_cult
       - raytac_an54lv_db_15/nrf54l15/cpuapp/ns
   drivers.watchdog.stm32wwdg:
     filter: dt_compat_enabled("st,stm32-window-watchdog") or dt_compat_enabled("st,stm32-watchdog")
