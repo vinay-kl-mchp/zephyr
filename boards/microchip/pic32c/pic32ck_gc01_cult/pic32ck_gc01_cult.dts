@@ -26,6 +26,7 @@
 		zephyr,shell-uart = &sercom5;
 		zephyr,canbus = &can0;
 		zephyr,entropy = &trng;
+		zephyr,sdhc = &sdhc0;
 	};
 
 	aliases {
@@ -38,6 +39,7 @@
 		i2c0 = &sercom4;
 		eeprom-0 = &at24_eeprom;
 		spi0 = &sercom2;
+		sdhc0 = &sdhc0;
 	};
 
 	leds {
@@ -490,4 +492,18 @@ zephyr_udc0: &usb0 {
 
 zephyr_udc0: &hsusb0 {
 	status = "okay";
+};
+
+&sdhc0 {
+	compatible = "microchip,sdhc-g1";
+	pinctrl-0 = <&sdhc0_default>;
+	pinctrl-names = "default";
+	auto-cmd23;
+	status = "okay";
+
+	disk {
+		compatible = "zephyr,sdmmc-disk";
+		disk-name = "SD";
+		status = "okay";
+	};
 };
