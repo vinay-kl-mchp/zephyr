@@ -11,3 +11,4 @@ tests:
       - pic32cm_gc00_cpro
       - pic32cm_jh01_cpro
       - pic32cz_ca80_cult
+      - pic32cz_ca90_cult
