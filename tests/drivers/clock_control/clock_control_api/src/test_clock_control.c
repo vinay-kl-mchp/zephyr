@@ -16,21 +16,20 @@ LOG_MODULE_REGISTER(test);
 #include "esp32_device_subsys.h"
 #elif DT_HAS_COMPAT_STATUS_OKAY(silabs_series_clock)
 #include "silabs_device_subsys.h"
-#elif DT_HAS_COMPAT_STATUS_OKAY(microchip_sam_d5x_e5x_clock) || \
-	DT_HAS_COMPAT_STATUS_OKAY(microchip_pic32cm_jh_clock) || \
-	DT_HAS_COMPAT_STATUS_OKAY(microchip_pic32cz_ca_clock) || \
-	DT_HAS_COMPAT_STATUS_OKAY(microchip_pic32cm_pl_clock)
+#elif DT_HAS_COMPAT_STATUS_OKAY(microchip_sam_d5x_e5x_clock) ||                                    \
+	DT_HAS_COMPAT_STATUS_OKAY(microchip_pic32cm_jh_clock) ||                                   \
+	DT_HAS_COMPAT_STATUS_OKAY(microchip_pic32cz_ca_clock) ||                                   \
+	DT_HAS_COMPAT_STATUS_OKAY(microchip_pic32cm_pl_clock) ||                                   \
+	DT_HAS_COMPAT_STATUS_OKAY(microchip_pic32ck_sg_gc_clock)
 #include "mchp_device_subsys.h"
 #else
 #error "Unsupported board"
 #endif
 
-typedef void (*test_func_t)(const struct device *dev,
-			    clock_control_subsys_t subsys,
+typedef void (*test_func_t)(const struct device *dev, clock_control_subsys_t subsys,
 			    uint32_t startup_us);
 
-typedef bool (*test_capability_check_t)(const struct device *dev,
-					clock_control_subsys_t subsys);
+typedef bool (*test_capability_check_t)(const struct device *dev, clock_control_subsys_t subsys);
 
 static void setup_instance(const struct device *dev, clock_control_subsys_t subsys)
 {
@@ -41,8 +40,7 @@ static void setup_instance(const struct device *dev, clock_control_subsys_t subs
 #if defined(CONFIG_CLOCK_CONTROL_NRF)
 #if DT_HAS_COMPAT_STATUS_OKAY(nordic_nrf_clock)
 		if (err == -EPERM) {
-			struct onoff_manager *mgr =
-				z_nrf_clock_control_get_onoff(subsys);
+			struct onoff_manager *mgr = z_nrf_clock_control_get_onoff(subsys);
 
 			err = onoff_release(mgr);
 			if (err >= 0) {
@@ -60,14 +58,12 @@ static void setup_instance(const struct device *dev, clock_control_subsys_t subs
 		}
 #endif
 #endif
-	} while (clock_control_get_status(dev, subsys) !=
-			CLOCK_CONTROL_STATUS_OFF);
+	} while (clock_control_get_status(dev, subsys) != CLOCK_CONTROL_STATUS_OFF);
 
 	LOG_INF("setup done: %s", dev->name);
 }
 
-static void tear_down_instance(const struct device *dev,
-				clock_control_subsys_t subsys)
+static void tear_down_instance(const struct device *dev, clock_control_subsys_t subsys)
 {
 #if defined(CONFIG_CLOCK_CONTROL_NRF)
 #if DT_HAS_COMPAT_STATUS_OKAY(nordic_nrf_clock)
@@ -80,7 +76,7 @@ static void tear_down_instance(const struct device *dev,
 	zassert_true(device_is_ready(clk), "Clock dev is not ready");
 
 	if (clock_control_get_status(clk, CLOCK_CONTROL_NRF_SUBSYS_LF) !=
-		CLOCK_CONTROL_STATUS_OFF) {
+	    CLOCK_CONTROL_STATUS_OFF) {
 		return;
 	}
 
@@ -102,8 +98,7 @@ static void tear_down_instance(const struct device *dev,
 
 	zassert_true(device_is_ready(clk), "Clock dev is not ready");
 
-	if (clock_control_get_status(clk, NULL) !=
-		CLOCK_CONTROL_STATUS_OFF) {
+	if (clock_control_get_status(clk, NULL) != CLOCK_CONTROL_STATUS_OFF) {
 		return;
 	}
 
@@ -119,10 +114,8 @@ static void tear_down_instance(const struct device *dev,
 #endif /* defined(CONFIG_CLOCK_CONTROL_NRF) */
 }
 
-static void test_with_single_instance(const struct device *dev,
-				      clock_control_subsys_t subsys,
-				      uint32_t startup_time,
-				      test_func_t func,
+static void test_with_single_instance(const struct device *dev, clock_control_subsys_t subsys,
+				      uint32_t startup_time, test_func_t func,
 				      test_capability_check_t capability_check)
 {
 	setup_instance(dev, subsys);
@@ -137,17 +130,15 @@ static void test_with_single_instance(const struct device *dev,
 	/* Allow logs to be printed. */
 	k_sleep(K_MSEC(100));
 }
-static void test_all_instances(test_func_t func,
-				test_capability_check_t capability_check)
+static void test_all_instances(test_func_t func, test_capability_check_t capability_check)
 {
 	for (size_t i = 0; i < ARRAY_SIZE(devices); i++) {
 		for (size_t j = 0; j < devices[i].subsys_cnt; j++) {
-			zassert_true(device_is_ready(devices[i].dev),
-					"Device %s is not ready", devices[i].dev->name);
-			test_with_single_instance(devices[i].dev,
-					devices[i].subsys_data[j].subsys,
-					devices[i].subsys_data[j].startup_us,
-					func, capability_check);
+			zassert_true(device_is_ready(devices[i].dev), "Device %s is not ready",
+				     devices[i].dev->name);
+			test_with_single_instance(devices[i].dev, devices[i].subsys_data[j].subsys,
+						  devices[i].subsys_data[j].startup_us, func,
+						  capability_check);
 		}
 	}
 }
@@ -155,30 +146,29 @@ static void test_all_instances(test_func_t func,
 /*
  * Basic test for checking correctness of getting clock status.
  */
-static void test_on_off_status_instance(const struct device *dev,
-					clock_control_subsys_t subsys,
+static void test_on_off_status_instance(const struct device *dev, clock_control_subsys_t subsys,
 					uint32_t startup_us)
 {
 	enum clock_control_status status;
 	int err;
 
 	status = clock_control_get_status(dev, subsys);
-	zassert_equal(CLOCK_CONTROL_STATUS_OFF, status,
-			"%s: Unexpected status (%d)", dev->name, status);
+	zassert_equal(CLOCK_CONTROL_STATUS_OFF, status, "%s: Unexpected status (%d)", dev->name,
+		      status);
 
 	err = clock_control_on(dev, subsys);
 	zassert_equal(0, err, "%s: Unexpected err (%d)", dev->name, err);
 
 	status = clock_control_get_status(dev, subsys);
-	zassert_equal(status, CLOCK_CONTROL_STATUS_ON,
-			"%s: Unexpected status (%d)", dev->name, status);
+	zassert_equal(status, CLOCK_CONTROL_STATUS_ON, "%s: Unexpected status (%d)", dev->name,
+		      status);
 
 	err = clock_control_off(dev, subsys);
 	zassert_equal(0, err, "%s: Unexpected err (%d)", dev->name, err);
 
 	status = clock_control_get_status(dev, subsys);
-	zassert_equal(CLOCK_CONTROL_STATUS_OFF, status,
-			"%s: Unexpected status (%d)", dev->name, status);
+	zassert_equal(CLOCK_CONTROL_STATUS_OFF, status, "%s: Unexpected status (%d)", dev->name,
+		      status);
 }
 
 ZTEST(clock_control, test_on_off_status)
@@ -186,8 +176,7 @@ ZTEST(clock_control, test_on_off_status)
 	test_all_instances(test_on_off_status_instance, NULL);
 }
 
-static void async_capable_callback(const struct device *dev,
-				   clock_control_subsys_t subsys,
+static void async_capable_callback(const struct device *dev, clock_control_subsys_t subsys,
 				   void *user_data)
 {
 	/* empty */
@@ -206,8 +195,7 @@ static bool async_capable(const struct device *dev, clock_control_subsys_t subsy
 		return false;
 	}
 
-	while (clock_control_get_status(dev, subsys) !=
-		CLOCK_CONTROL_STATUS_ON) {
+	while (clock_control_get_status(dev, subsys) != CLOCK_CONTROL_STATUS_ON) {
 		/* pend util clock is started */
 	}
 
@@ -223,17 +211,15 @@ static bool async_capable(const struct device *dev, clock_control_subsys_t subsy
 /*
  * Test checks that callbacks are called after clock is started.
  */
-static void clock_on_callback(const struct device *dev,
-				clock_control_subsys_t subsys,
-				void *user_data)
+static void clock_on_callback(const struct device *dev, clock_control_subsys_t subsys,
+			      void *user_data)
 {
 	bool *executed = (bool *)user_data;
 
 	*executed = true;
 }
 
-static void test_async_on_instance(const struct device *dev,
-				   clock_control_subsys_t subsys,
+static void test_async_on_instance(const struct device *dev, clock_control_subsys_t subsys,
 				   uint32_t startup_us)
 {
 	enum clock_control_status status;
@@ -241,8 +227,8 @@ static void test_async_on_instance(const struct device *dev,
 	bool executed = false;
 
 	status = clock_control_get_status(dev, subsys);
-	zassert_equal(CLOCK_CONTROL_STATUS_OFF, status,
-			"%s: Unexpected status (%d)", dev->name, status);
+	zassert_equal(CLOCK_CONTROL_STATUS_OFF, status, "%s: Unexpected status (%d)", dev->name,
+		      status);
 
 	err = clock_control_async_on(dev, subsys, clock_on_callback, &executed);
 	zassert_equal(0, err, "%s: Unexpected err (%d)", dev->name, err);
@@ -251,9 +237,8 @@ static void test_async_on_instance(const struct device *dev,
 	k_busy_wait(startup_us);
 
 	zassert_true(executed, "%s: Expected flag to be true", dev->name);
-	zassert_equal(CLOCK_CONTROL_STATUS_ON,
-			clock_control_get_status(dev, subsys),
-			"Unexpected clock status");
+	zassert_equal(CLOCK_CONTROL_STATUS_ON, clock_control_get_status(dev, subsys),
+		      "Unexpected clock status");
 }
 
 ZTEST(clock_control, test_async_on)
@@ -267,8 +252,7 @@ ZTEST(clock_control, test_async_on)
  * is reported.
  */
 static void test_async_on_stopped_on_instance(const struct device *dev,
-					      clock_control_subsys_t subsys,
-					      uint32_t startup_us)
+					      clock_control_subsys_t subsys, uint32_t startup_us)
 {
 	enum clock_control_status status;
 	int err;
@@ -276,8 +260,8 @@ static void test_async_on_stopped_on_instance(const struct device *dev,
 	bool executed = false;
 
 	status = clock_control_get_status(dev, subsys);
-	zassert_equal(CLOCK_CONTROL_STATUS_OFF, status,
-			"%s: Unexpected status (%d)", dev->name, status);
+	zassert_equal(CLOCK_CONTROL_STATUS_OFF, status, "%s: Unexpected status (%d)", dev->name,
+		      status);
 
 	/* lock to prevent clock interrupt for fast starting clocks.*/
 	key = irq_lock();
@@ -303,27 +287,26 @@ ZTEST(clock_control, test_async_on_stopped)
 /*
  * Second clock_control_on may return success or -EALREADY; clock must stay on.
  */
-static void test_double_start_on_instance(const struct device *dev,
-						clock_control_subsys_t subsys,
-						uint32_t startup_us)
+static void test_double_start_on_instance(const struct device *dev, clock_control_subsys_t subsys,
+					  uint32_t startup_us)
 {
 	enum clock_control_status status;
 	int err;
 
 	status = clock_control_get_status(dev, subsys);
-	zassert_equal(CLOCK_CONTROL_STATUS_OFF, status,
-			"%s: Unexpected status (%d)", dev->name, status);
+	zassert_equal(CLOCK_CONTROL_STATUS_OFF, status, "%s: Unexpected status (%d)", dev->name,
+		      status);
 
 	err = clock_control_on(dev, subsys);
 	zassert_equal(0, err, "%s: Unexpected err (%d)", dev->name, err);
 
 	err = clock_control_on(dev, subsys);
-	zassert_true(err == 0 || err == -EALREADY,
-		     "%s: Unexpected return value:%d", dev->name, err);
+	zassert_true(err == 0 || err == -EALREADY, "%s: Unexpected return value:%d", dev->name,
+		     err);
 
 	status = clock_control_get_status(dev, subsys);
-	zassert_equal(CLOCK_CONTROL_STATUS_ON, status,
-		      "%s: Clock should still be on (%d)", dev->name, status);
+	zassert_equal(CLOCK_CONTROL_STATUS_ON, status, "%s: Clock should still be on (%d)",
+		      dev->name, status);
 }
 
 ZTEST(clock_control, test_double_start)
@@ -335,16 +318,15 @@ ZTEST(clock_control, test_double_start)
  * Test checks that the second stop returns 0.
  * Test precondition: clock is stopped.
  */
-static void test_double_stop_on_instance(const struct device *dev,
-						clock_control_subsys_t subsys,
-						uint32_t startup_us)
+static void test_double_stop_on_instance(const struct device *dev, clock_control_subsys_t subsys,
+					 uint32_t startup_us)
 {
 	enum clock_control_status status;
 	int err;
 
 	status = clock_control_get_status(dev, subsys);
-	zassert_equal(CLOCK_CONTROL_STATUS_OFF, status,
-			"%s: Unexpected status (%d)", dev->name, status);
+	zassert_equal(CLOCK_CONTROL_STATUS_OFF, status, "%s: Unexpected status (%d)", dev->name,
+		      status);
 
 	err = clock_control_off(dev, subsys);
 	zassert_equal(0, err, "%s: Unexpected err (%d)", dev->name, err);
