@@ -16,6 +16,7 @@ supported:
   - counter
   - eeprom
   - entropy
+  - flash
   - gpio
   - hwinfo
   - interrupt_controller

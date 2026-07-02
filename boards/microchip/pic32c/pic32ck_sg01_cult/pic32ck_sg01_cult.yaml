@@ -14,6 +14,7 @@ supported:
   - clock_control
   - eeprom
   - entropy
+  - flash
   - gpio
   - hwinfo
   - i2c
