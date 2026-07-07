@@ -1,0 +1,63 @@
+/*
+ * SPDX-FileCopyrightText: Copyright (c) 2026 Microchip Technology Inc.
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+/*
+ * SD Card SPI Mode Configuration for PIC32CK GC01 Curiosity Ultra
+ * Uses IO1 Xplained Pro on EXT1 header
+ */
+
+/ {
+	aliases {
+		sdhc0 = &sdhc_spi0;
+	};
+};
+
+&portc_secure {
+	status = "okay";
+};
+
+&sdhc0 {
+	status = "disabled";
+
+	disk {
+		status = "disabled";
+	};
+};
+
+&pinctrl {
+	sdhc_spi_ext1: sercom2_spi_ext1 {
+		group1 {
+			pinmux = <PC15C_SERCOM2_PAD0>,
+				 <PC16C_SERCOM2_PAD1>,
+				 <PC17C_SERCOM2_PAD2>;
+		};
+	};
+};
+
+&sercom2 {
+	status = "okay";
+
+	pinctrl-0 = <&sdhc_spi_ext1>;
+	pinctrl-names = "default";
+
+	dipo = <2>;
+	dopo = <0>;
+
+	/* EXT1 CS pin */
+	cs-gpios = <&portc_secure 14 GPIO_ACTIVE_LOW>;
+
+	sdhc_spi0: sdhc@0 {
+		compatible = "zephyr,sdhc-spi-slot";
+		reg = <0>;
+		status = "okay";
+		spi-max-frequency = <8000000>;
+
+		sdmmc {
+			compatible = "zephyr,sdmmc-disk";
+			disk-name = "SD";
+			status = "okay";
+		};
+	};
+};
