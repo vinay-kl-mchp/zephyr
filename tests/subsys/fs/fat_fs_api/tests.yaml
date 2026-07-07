@@ -112,3 +112,19 @@ tests:
       - CONFIG_TEST_EXTRA_STACK_SIZE=8192
     platform_allow:
       - qemu_cortex_a53
+  drivers.sdhc.sdhc_spi:
+    depends_on: spi
+    harness: ztest
+    harness_config:
+      fixture: fixture_sdhc
+    filter: dt_alias_exists("sdhc0") and dt_compat_enabled("zephyr,sdhc-spi-slot")
+    extra_args:
+      - DTC_OVERLAY_FILE="boards/${BOARD}_sdhc_spi.overlay"
+    extra_configs:
+      - CONFIG_MAIN_STACK_SIZE=8192
+      - CONFIG_ZTEST_STACK_SIZE=4096
+    tags: sdhc
+    platform_allow:
+      - pic32ck_gc01_cult
+      - pic32ck_sg01_cult
+      - sam_e54_xpro
