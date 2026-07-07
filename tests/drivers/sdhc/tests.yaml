@@ -40,3 +40,16 @@ tests:
       - DTC_OVERLAY_FILE="boards/${BOARD}_${NORMALIZED_BOARD_QUALIFIERS}_sci_b_spi.overlay"
     platform_allow:
       - ek_ra8p1/r7ka8p1kflcac/cm85
+  drivers.sdhc.sdhc_spi:
+    depends_on: spi
+    harness: ztest
+    harness_config:
+      fixture: fixture_sdhc
+    filter: dt_alias_exists("sdhc0") and dt_compat_enabled("zephyr,sdhc-spi-slot")
+    extra_args:
+      - DTC_OVERLAY_FILE="boards/${BOARD}_sdhc_spi.overlay"
+    tags: sdhc
+    platform_allow:
+      - pic32ck_gc01_cult
+      - pic32ck_sg01_cult
+      - sam_e54_xpro
