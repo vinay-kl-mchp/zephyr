@@ -61,3 +61,10 @@ config FLASH_SAM_QSPI
 	select DMA if $(dt_compat_any_has_prop,$(DT_COMPAT_MICROCHIP_QSPI_G1_FLASH),dmas)
 	help
 	  Enable Microchip QUAD SPI flash driver.
+
+config FLASH_MCHP_PMECC_G1
+	bool "Microchip Programmable Multibit Error Correcting Code (PMECC) G1"
+	default y
+	depends on DT_HAS_MICROCHIP_PMECC_G1_FLASH_ENABLED
+	help
+	  Enable driver for Microchip Programmable Multibit Error Correcting Code G1.
