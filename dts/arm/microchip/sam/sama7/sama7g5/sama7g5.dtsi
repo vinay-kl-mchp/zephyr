@@ -207,6 +207,16 @@
 			reg-names = "base", "mmap";
 			clocks = <&pmc PMC_TYPE_PERIPHERAL 79>, <&pmc PMC_TYPE_GCK 79>;
 			clock-names = "hclock", "multclk";
+		};
+
+		hsmc: hsmc@e0808000 {
+			compatible = "microchip,smc-g1-memc";
+			reg = <0xe0808000 0x1000>;
+			interrupt-parent = <&gic>;
+			interrupts = <GIC_SPI 21 IRQ_TYPE_LEVEL IRQ_DEFAULT_PRIORITY>;
+			clocks = <&pmc PMC_TYPE_PERIPHERAL 21>;
+			#address-cells = <1>;
+			#size-cells = <1>;
 			status = "disabled";
 		};
 
