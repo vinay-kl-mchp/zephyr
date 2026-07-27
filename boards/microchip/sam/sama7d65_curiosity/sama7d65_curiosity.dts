@@ -110,6 +110,10 @@
 	status = "okay";
 };
 
+&ebi {
+	status = "okay";
+};
+
 &flx6 {
 	mchp,flexcom-mode = <SAM_FLEXCOM_MODE_USART>;
 	status = "okay";
@@ -180,6 +184,10 @@
 		reg = <7>;
 		status = "okay";
 	};
+};
+
+&hsmc {
+	status = "okay";
 };
 
 &mcan1 {
