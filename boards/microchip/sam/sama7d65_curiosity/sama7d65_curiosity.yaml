@@ -12,6 +12,7 @@ supported:
   - adc
   - button
   - can
+  - counter
   - crypto
   - eeprom
   - entropy
