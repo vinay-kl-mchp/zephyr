@@ -100,6 +100,14 @@ static const struct arm_mmu_region mmu_regions[] = {
 				       DT_REG_ADDR_BY_IDX(DT_NODELABEL(udphsb), 0),
 				       DT_REG_SIZE_BY_IDX(DT_NODELABEL(udphsb), 0),
 				       MT_STRONGLY_ORDERED | MPERM_R | MPERM_W),))
+
+	IF_ENABLED(DT_NODE_HAS_STATUS_OKAY(DT_NODELABEL(tc0)),
+		   (MMU_REGION_FLAT_ENTRY("tc0", TC0_BASE_ADDRESS, 0x100,
+					  MT_STRONGLY_ORDERED | MPERM_R | MPERM_W),))
+
+	IF_ENABLED(DT_NODE_HAS_STATUS_OKAY(DT_NODELABEL(tc1)),
+		   (MMU_REGION_FLAT_ENTRY("tc1", TC1_BASE_ADDRESS, 0x100,
+					  MT_STRONGLY_ORDERED | MPERM_R | MPERM_W),))
 };
 
 const struct arm_mmu_config mmu_config = {
@@ -141,6 +149,12 @@ void soc_early_init_hook(void)
 
 	/* Enable generic clock for MCANx, frequency MCK1 / (4 + 1) = 40MHz */
 	FOR_EACH_IDX(MCAN_CLK_INIT_DEFN, (), 0, 1, 2, 3, 4)
+
+	/* Enable Generic clock for TC0 channels, frequency is 33.333MHz */
+	CONFIGURE_GCLK(ID_TC0_CHANNEL0, 6, PMC_PCR_GCLKCSS_BAUDPLL);
+
+	/* Enable Generic clock for TC1 channels, frequency is 66.667MHz */
+	CONFIGURE_GCLK(ID_TC1_CHANNEL0, 3, PMC_PCR_GCLKCSS_BAUDPLL);
 
 	/* config ETHPLL to 625 MHz, 24 * (0x19 + 1 + 0x2aaab / 2^22) = 625 */
 	if (DT_HAS_COMPAT_STATUS_OKAY(atmel_sam_gmac)) {
