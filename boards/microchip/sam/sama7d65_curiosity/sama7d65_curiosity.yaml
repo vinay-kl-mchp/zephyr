@@ -24,6 +24,7 @@ supported:
   - pinctrl
   - pwm
   - rtc
+  - spi
   - uart
   - usbd
 vendor: microchip
