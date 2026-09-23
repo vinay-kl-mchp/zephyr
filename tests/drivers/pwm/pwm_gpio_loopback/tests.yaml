@@ -117,3 +117,21 @@ tests:
       platform:pic32ck_gc01_cult/pic32ck2051gc01144:DTC_OVERLAY_FILE="boards/microchip/pic32ck_gc01_cult_tcc7.overlay"
     platform_allow:
       - pic32ck_gc01_cult
+
+  drivers.pwm.gpio_loopback_tcc0.mchp:
+    platform_allow:
+      - pic32cx_sg41_cult
+    extra_args:
+      - FILE_SUFFIX=tcc0
+
+  drivers.pwm.gpio_loopback_tcc1.mchp:
+    platform_allow:
+      - pic32cx_sg41_cult
+    extra_args:
+      - FILE_SUFFIX=tcc1
+
+  drivers.pwm.gpio_loopback_tcc4.mchp:
+    platform_allow:
+      - pic32cx_sg41_cult
+    extra_args:
+      - FILE_SUFFIX=tcc4
