@@ -24,6 +24,8 @@
 #include <zephyr/linker/linker-tool-lld.h>
 #elif defined(__ELD_LINKER_CMD__)
 #include <zephyr/linker/linker-tool-gcc.h>
+#elif defined(__XCDSC_LINKER_CMD__)
+#include <zephyr/linker/linker-tool-xcdsc.h>
 #else
 #error "Unknown toolchain"
 #endif
