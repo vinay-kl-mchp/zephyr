@@ -77,6 +77,7 @@ tests:
       - pic32cx_sg41_cult
       - pic32cx_sg61_cult
       - pic32cx_sg41_cult
+      - pic32cm_jh01_cpro
     extra_args:
       - FILE_SUFFIX=tc0
 
@@ -85,6 +86,18 @@ tests:
       - sam_e54_xpro
     extra_args:
       - FILE_SUFFIX=tc1
+
+  drivers.pwm.gpio_loopback_tc2.mchp:
+    platform_allow:
+      - pic32cm_jh01_cpro
+    extra_args:
+      - FILE_SUFFIX=tc2
+
+  drivers.pwm.gpio_loopback_tc3.mchp:
+    platform_allow:
+      - pic32cm_jh01_cpro
+    extra_args:
+      - FILE_SUFFIX=tc3
 
   drivers.pwm.gpio_loopback_tc4.mchp:
     platform_allow:

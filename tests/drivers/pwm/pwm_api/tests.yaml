@@ -129,6 +129,7 @@ tests:
       - sam_e54_xpro
       - pic32cx_sg61_cult
       - pic32cx_sg41_cult
+      - pic32cm_jh01_cpro
     extra_args:
       - FILE_SUFFIX=tc0
     filter: dt_alias_exists("pwm-test")
@@ -137,6 +138,7 @@ tests:
       - sam_e54_xpro
       - pic32cx_sg61_cult
       - pic32cx_sg41_cult
+      - pic32cm_jh01_cpro
     extra_args:
       - FILE_SUFFIX=tc1
     filter: dt_alias_exists("pwm-test")
@@ -145,6 +147,7 @@ tests:
       - sam_e54_xpro
       - pic32cx_sg61_cult
       - pic32cx_sg41_cult
+      - pic32cm_jh01_cpro
     extra_args:
       - FILE_SUFFIX=tc2
     filter: dt_alias_exists("pwm-test")
@@ -153,6 +156,7 @@ tests:
       - sam_e54_xpro
       - pic32cx_sg61_cult
       - pic32cx_sg41_cult
+      - pic32cm_jh01_cpro
     extra_args:
       - FILE_SUFFIX=tc3
     filter: dt_alias_exists("pwm-test")
@@ -161,6 +165,7 @@ tests:
       - sam_e54_xpro
       - pic32cx_sg61_cult
       - pic32cx_sg41_cult
+      - pic32cm_jh01_cpro
     extra_args:
       - FILE_SUFFIX=tc4
     filter: dt_alias_exists("pwm-test")
@@ -178,6 +183,7 @@ tests:
       - sam_e54_xpro
       - pic32cx_sg61_cult
       - pic32cx_sg41_cult
+      - pic32cm_jh01_cpro
     extra_args:
       - FILE_SUFFIX=tc6
     filter: dt_alias_exists("pwm-test")
@@ -186,6 +192,7 @@ tests:
       - sam_e54_xpro
       - pic32cx_sg61_cult
       - pic32cx_sg41_cult
+      - pic32cm_jh01_cpro
     extra_args:
       - FILE_SUFFIX=tc7
     filter: dt_alias_exists("pwm-test")
