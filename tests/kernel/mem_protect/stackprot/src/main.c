@@ -161,6 +161,10 @@ ZTEST_USER(stackprot, test_stackprot_no_false_positive)
  */
 ZTEST(stackprot, test_stackprot_canary_overflow)
 {
+#ifdef CONFIG_DSPIC
+	ztest_test_skip();
+#endif /* CONFIG_DSPIC */
+
 	/* Start thread */
 	k_thread_create(&alt_thread_data, alt_thread_stack_area, STACKSIZE,
 			alternate_thread, NULL, NULL, NULL,

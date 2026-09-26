@@ -9,6 +9,7 @@ Architecture-related Guides
    arc-support-status.rst
    arm_cortex_m.rst
    arm64.rst
+   dspic33a.rst
    risc-v.rst
    semihost.rst
    tricore.rst

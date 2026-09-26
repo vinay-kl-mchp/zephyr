@@ -54,6 +54,7 @@ $defs:
           - arm
           - arm64
           - hexagon
+          - dspic
           - mips
           - nios2
           - openrisc

@@ -315,6 +315,14 @@ static inline void trigger_irq(int irq)
 	intc_aurix_ir_irq_raise(irq);
 }
 
+#elif defined(CONFIG_DSPIC)
+extern void z_dspic_enter_irq(int);
+
+static inline void trigger_irq(int irq)
+{
+	z_dspic_enter_irq(irq);
+}
+
 #else
 #define NO_TRIGGER_FROM_SW
 #endif
