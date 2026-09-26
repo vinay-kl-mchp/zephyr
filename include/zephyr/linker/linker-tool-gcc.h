@@ -65,6 +65,10 @@
 	OUTPUT_FORMAT("elf32-hexagon")
 #elif defined(CONFIG_TRICORE)
 	OUTPUT_FORMAT("elf32-tricore")
+#elif defined(CONFIG_DSPIC)
+	OUTPUT_FORMAT("elf32-pic30")
+	OUTPUT_ARCH("33AK128MC106")
+	OUTPUT_ARCH("33AK256MPS306")
 #else
 	#error Arch not supported.
 #endif

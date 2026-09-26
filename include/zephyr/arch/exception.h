@@ -184,6 +184,8 @@ static inline void arch_exception_call_dump_hook(const char *format, ...)
 #include <zephyr/arch/tricore/exception.h>
 #elif defined(CONFIG_ARCH_IS_SET)
 #error "The selected architecture is missing from this dispatch header"
+#elif defined(CONFIG_DSPIC)
+#include <zephyr/arch/dspic/exception.h>
 #endif
 
 #endif /* ZEPHYR_INCLUDE_ARCH_EXCEPTION_H_ */

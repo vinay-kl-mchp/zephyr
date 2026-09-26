@@ -551,9 +551,12 @@ FUNC_NORETURN void z_cstart(void)
 	/* do any necessary initialization of static devices */
 	z_device_state_init();
 
+#if CONFIG_SOC_EARLY_INIT_HOOK
 	soc_early_init_hook();
-
+#endif
+#if CONFIG_BOARD_EARLY_INIT_HOOK
 	board_early_init_hook();
+#endif
 
 	/* Run kernel pre-init hooks before PRE_KERNEL device init, so those
 	 * drivers may use the kernel objects initialized here. Entries are

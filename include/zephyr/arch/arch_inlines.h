@@ -40,6 +40,8 @@
 #include <zephyr/arch/tricore/arch_inlines.h>
 #elif defined(CONFIG_ARCH_IS_SET)
 #error "The selected architecture is missing from this dispatch header"
+#elif defined(CONFIG_DSPIC)
+#include <zephyr/arch/dspic/arch_inlines.h>
 #endif
 
 #endif /* ZEPHYR_INCLUDE_ARCH_ARCH_INLINES_H_ */

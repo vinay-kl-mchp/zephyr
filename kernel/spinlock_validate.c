@@ -171,7 +171,7 @@ void z_assert_can_swap(unsigned int key, struct k_spinlock *swap_lock)
 			 "Context switching while holding %d extra spinlock(s)!", extra);
 	}
 
-#ifndef CONFIG_ARM64
+#if !defined(CONFIG_ARM64) && !defined(CONFIG_DSPIC)
 	/* Dummy threads start with IRQs masked and dead threads are being
 	 * torn down; in both cases the IRQ state self-heals on the next
 	 * switch-in, so they are exempt.  Disabled on ARM64 where FP/SIMD

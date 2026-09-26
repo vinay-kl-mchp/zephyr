@@ -39,6 +39,8 @@
 #include <zephyr/arch/tricore/arch.h>
 #elif defined(CONFIG_ARCH_IS_SET)
 #error "The selected architecture is missing from this dispatch header"
+#elif defined(CONFIG_DSPIC)
+#include <zephyr/arch/dspic/arch.h>
 #endif
 
 #endif /* ZEPHYR_INCLUDE_ARCH_CPU_H_ */
