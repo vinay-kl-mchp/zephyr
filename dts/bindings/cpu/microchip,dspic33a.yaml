@@ -1,0 +1,8 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 Microchip Technology Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+description: Microchip dsPIC33A CPU
+
+compatible: "microchip,dspic33a"
+
+include: cpu.yaml
