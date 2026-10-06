@@ -41,6 +41,7 @@ tests:
     platform_allow:
       - sam_e54_xpro
       - pic32cz_ca80_cult
+      - pic32cm_sg00_cpro
 
   drivers.spi.spi_mode1:
     extra_configs:
@@ -51,6 +52,7 @@ tests:
     platform_allow:
       - sam_e54_xpro
       - pic32cz_ca80_cult
+      - pic32cm_sg00_cpro
 
   drivers.spi.spi_mode2:
     extra_configs:
@@ -61,6 +63,7 @@ tests:
     platform_allow:
       - sam_e54_xpro
       - pic32cz_ca80_cult
+      - pic32cm_sg00_cpro
 
   drivers.spi.spi_mode3:
     extra_configs:
@@ -71,6 +74,7 @@ tests:
     platform_allow:
       - sam_e54_xpro
       - pic32cz_ca80_cult
+      - pic32cm_sg00_cpro
 
   drivers.spi.spi_mode0.incorrect_sck_state:
     extra_configs:
@@ -115,6 +119,7 @@ tests:
     platform_allow:
       - sam_e54_xpro
       - pic32cz_ca80_cult
+      - pic32cm_sg00_cpro
 
   drivers.spi.spi_2M666666Hz:
     extra_configs:
