@@ -1,0 +1,46 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 Microchip Technology Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+title: Microchip dsPIC33 Timer G1
+
+description: |
+  Microchip DSPIC33 timer
+
+  Group g1 TIMER driver supports following hardware peripherals:
+    - module name="Timer" id="02673" version="1"
+
+compatible: "microchip,timer-g1-timer"
+
+include: base.yaml
+
+properties:
+  reg:
+    required: true
+
+  clock-frequency:
+    type: int
+    required: true
+    description: |
+      Input clock frequency, in Hz, feeding the timer's prescaler.
+
+  prescaler:
+    type: int
+    required: true
+    description: |
+      Prescaler divider applied to clock-frequency before it reaches the
+      timer's counter. Valid values are 1, 8, 64, and 256.
+
+  interrupts:
+    required: true
+
+examples:
+  - |
+    timer1: timer@1e00 {
+        compatible = "microchip,timer-g1-timer";
+        reg = <0x1e00 0xc>;
+        clock-frequency = <4000000>;
+        prescaler = <8>;
+        interrupt-parent = <&intc0>;
+        interrupts = <48 1>;
+        status = "disabled";
+    };

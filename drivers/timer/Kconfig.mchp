@@ -1,0 +1,11 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 Microchip Technology Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+config TIMER_MCHP_TIMER_G1
+	bool "Microchip dsPIC33 G1 timer"
+	default y
+	depends on DT_HAS_MICROCHIP_TIMER_G1_TIMER_ENABLED
+	help
+	  This module implements a kernel device driver for group (g1) of
+	  Microchip dsPIC33 timer peripherals and provides the standard
+	  "system clock driver" interfaces.
