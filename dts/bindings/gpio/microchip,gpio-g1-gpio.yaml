@@ -1,0 +1,29 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 Microchip Technology Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+title: Microchip dsPIC33 GPIO G1
+
+description: |
+  Microchip dsPIC33 GPIO port controller
+
+  Group g1 GPIO driver supports following hardware peripherals:
+    - module name="GPIO" id="04928" version="2"
+
+compatible: "microchip,gpio-g1-gpio"
+
+include: [gpio-controller.yaml]
+
+properties:
+  reg:
+    type: array
+    required: true
+
+  gpio-controller: {}
+
+  "#gpio-cells":
+    type: int
+    const: 2
+
+gpio-cells:
+  - pin
+  - flags
