@@ -32,3 +32,10 @@ config PIN_DRIVE_STRENGTH
 	  This option enables Drive strength for the pin.
 
 endif # PINCTRL_MCHP_COMMON
+
+config PINCTRL_MCHP_GPIO_G1
+	bool "Pin controller driver for Microchip dsPIC33 MCUs"
+	default y
+	depends on DT_HAS_MICROCHIP_GPIO_G1_PINCTRL_ENABLED
+	help
+	  Enable the pin controller driver for Microchip dsPIC33 MCUs.

@@ -1,0 +1,34 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 Microchip Technology Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+title: Microchip dsPIC33 Pinctrl G1
+
+description: |
+  Microchip dsPIC33 pin controller
+
+  Group g1 PINCTRL driver supports following hardware peripherals:
+    - module name="GPIO" id="04928" version="2"
+
+compatible: "microchip,gpio-g1-pinctrl"
+
+include: base.yaml
+
+properties:
+  reg:
+    required: true
+
+  "#address-cells":
+    const: 1
+
+  "#size-cells":
+    const: 1
+
+child-binding:
+  description: Pin configuration node
+  properties:
+    pinmux:
+      description: |
+        Pin multiplexing configuration for this group.
+        Multiple pins (like TX/RX) can be grouped inside one node.
+      required: true
+      type: int
