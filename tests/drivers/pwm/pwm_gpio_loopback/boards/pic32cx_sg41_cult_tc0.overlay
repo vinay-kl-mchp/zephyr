@@ -1,11 +1,14 @@
 /*
- * SPDX-FileCopyrightText: Copyright (c) 2026 Microchip Technology Inc.
- *
+ * SPDX-FileCopyrightText: Copyright 2026 Microchip Technology Inc.
  * SPDX-License-Identifier: Apache-2.0
  */
 
-/* connect the PB31 to PB30 */
+/* connect PB31 to PB30 */
 
+#define PWM_NODE    tc0
+#define PWM_PINCTRL tc0_pwm_default
+#define PWM_COMPAT "microchip,tc-g1-pwm"
+#include "mchp_pwm_loopback_support.dtsi"
 #include <zephyr/dt-bindings/gpio/gpio.h>
 
 / {
