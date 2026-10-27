@@ -21,6 +21,7 @@ supported:
   - reset
   - rtc
   - spi
+  - sdhc
   - uart
   - usbd
   - watchdog
