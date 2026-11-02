@@ -23,4 +23,5 @@ supported:
   - spi
   - uart
   - usbd
+  - video
 vendor: microchip
