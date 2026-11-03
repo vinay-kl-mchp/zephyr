@@ -13,6 +13,7 @@ supported:
   - can
   - clock_control
   - eeprom
+  - entropy
   - gpio
   - i2c
   - pinctrl

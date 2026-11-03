@@ -21,6 +21,7 @@
 		zephyr,console = &sercom5;
 		zephyr,shell-uart = &sercom5;
 		zephyr,canbus = &can0;
+		zephyr,entropy = &trng;
 	};
 
 	aliases {
@@ -327,5 +328,9 @@
 	#size-cells = <0>;
 	pinctrl-0 = <&sercom2_spi_default>;
 	pinctrl-names = "default";
+	status = "okay";
+};
+
+&trng {
 	status = "okay";
 };
