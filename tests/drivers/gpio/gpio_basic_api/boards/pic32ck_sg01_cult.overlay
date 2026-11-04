@@ -9,11 +9,11 @@
 / {
 	resources {
 		compatible = "test-gpio-basic-api";
-		out-gpios = <&porta_secure 5 0>; /* EXT1.5 */
-		in-gpios = <&porta_secure 4 0>;  /* EXT1.4 */
+		out-gpios = <&porta 5 0>; /* EXT1.5 */
+		in-gpios = <&porta 4 0>;  /* EXT1.4 */
 	};
 };
 
-&porta_secure {
+&porta {
 	status = "okay";
 };
