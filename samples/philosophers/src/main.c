@@ -58,8 +58,12 @@
 #define DEBUG_PRINTF 0
 #endif
 
+#if CONFIG_BOARD_DSPIC33A_CURIOSITY_P33AK128MC106
+#define NUM_PHIL 3
+#else
 #ifndef NUM_PHIL
 #define NUM_PHIL 6
+#endif
 #endif
 
 #ifndef STATIC_OBJS
