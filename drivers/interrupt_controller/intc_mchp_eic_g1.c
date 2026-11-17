@@ -146,6 +146,7 @@ struct eic_mchp_dev_data {
 	struct mchp_eic_nmi_config nmi;
 };
 
+ #if defined(CONFIG_SOC_FAMILY_MICROCHIP_PIC32CM_JH)
 /**
  * Check if a given port and pin is connected to EIC NMI
  *
@@ -178,7 +179,6 @@ static bool is_nmi_pin(int port, int pin)
  *         If the pin is unsupported, returns INTC_LINE_FREE.
  *         If the pin is an NMI pin, returns EIC_LINE_NMI.
  */
-#if defined(CONFIG_SOC_FAMILY_MICROCHIP_PIC32CM_JH)
 static uint8_t find_eic_line_from_pin(int port, int pin)
 {
 	uint8_t eic_line = pin % EIC_LINES_PER_PORT;
@@ -396,6 +396,7 @@ static void eic_nmi_handler(void)
 }
 #endif /* CONFIG_INTC_MCHP_EIC_G1_NMI */
 
+int eic_mchp_disable_interrupt(struct eic_config_params *eic_pin_config)
 {
 	const struct device *const dev = DEVICE_DT_INST_GET(0);
 	const struct eic_mchp_dev_cfg *eic_cfg = dev->config;
