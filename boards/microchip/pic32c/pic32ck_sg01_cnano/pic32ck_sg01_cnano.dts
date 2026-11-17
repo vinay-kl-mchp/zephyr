@@ -14,7 +14,8 @@
 
 	chosen {
 		zephyr,sram = &sram0;
-		zephyr,flash = &flash1;
+		zephyr,flash = &flash0;
+		zephyr,flash-controller = &nvmctrl;
 		zephyr,code-partition = &code_partition;
 	};
 
@@ -49,30 +50,24 @@
 		#size-cells = <1>;
 		ranges;
 
+		/* 128 KB BFM at 0x08000000 */
 		boot_partition: partition@0 {
 			label = "boot_flash";
 			compatible = "zephyr,mapped-partition";
 			reg = <0x0 DT_SIZE_K(128)>;
 		};
-	};
-};
 
-&flash1 {
-	partitions {
-		#address-cells = <1>;
-		#size-cells = <1>;
-		ranges;
-
-		code_partition: partition@0 {
+		/* PFM at 0x0C000000 (offset 0x4000000 from flash0 base) */
+		code_partition: partition@4000000 {
 			label = "program_flash";
 			compatible = "zephyr,mapped-partition";
-			reg = <0x0 DT_SIZE_K(2032)>;
+			reg = <0x4000000 DT_SIZE_K(2032)>;
 		};
 
-		storage_partition: partition@1fc000 {
+		storage_partition: partition@41fc000 {
 			label = "storage";
 			compatible = "zephyr,mapped-partition";
-			reg = <0x1fc000 DT_SIZE_K(16)>;
+			reg = <0x41fc000 DT_SIZE_K(16)>;
 		};
 	};
 };
