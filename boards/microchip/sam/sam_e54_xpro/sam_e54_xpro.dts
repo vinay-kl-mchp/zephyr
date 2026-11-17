@@ -243,15 +243,6 @@
 			fdpll-xosc-clock-divider = <5>;
 			fdpll-en = <1>;
 		};
-
-		fdpll1 {
-			subsystem = <CLOCK_MCHP_FDPLL_ID_FDPLL1>;
-			fdpll-divider-ratio-int = <15>;
-			fdpll-lock-bypass-en = <1>;
-			fdpll-wakeup-fast-en = <1>;
-			fdpll-src = "xosc1";
-			fdpll-en = <1>;
-		};
 	};
 
 	xosc32k: xosc32k {
@@ -293,8 +284,9 @@
 
 		gclkgen3 {
 			subsystem = <CLOCK_MCHP_GCLKGEN_ID_GEN3>;
-			gclkgen-div-factor = <1>;
-			gclkgen-src = "xosc1";
+			gclkgen-div-factor = <2>;
+			gclkgen-src = "fdpll1";
+			gclkgen-run-in-standby-en = <1>;
 			gclkgen-en = <1>;
 		};
 
@@ -312,14 +304,6 @@
 			subsystem = <CLOCK_MCHP_GCLKGEN_ID_GEN5>;
 			gclkgen-div-factor = <10>;
 			gclkgen-src = "fdpll0";
-			gclkgen-run-in-standby-en = <1>;
-			gclkgen-en = <1>;
-		};
-
-		gclkgen3 {
-			subsystem = <CLOCK_MCHP_GCLKGEN_ID_GEN3>;
-			gclkgen-div-factor = <2>;
-			gclkgen-src = "fdpll1";
 			gclkgen-run-in-standby-en = <1>;
 			gclkgen-en = <1>;
 		};
