@@ -146,7 +146,6 @@ struct eic_mchp_dev_data {
 	struct mchp_eic_nmi_config nmi;
 };
 
- #if defined(CONFIG_SOC_FAMILY_MICROCHIP_PIC32CM_JH)
 /**
  * Check if a given port and pin is connected to EIC NMI
  *
@@ -179,6 +178,7 @@ static bool is_nmi_pin(int port, int pin)
  *         If the pin is unsupported, returns INTC_LINE_FREE.
  *         If the pin is an NMI pin, returns EIC_LINE_NMI.
  */
+#if defined(CONFIG_SOC_FAMILY_MICROCHIP_PIC32CM_JH)
 static uint8_t find_eic_line_from_pin(int port, int pin)
 {
 	uint8_t eic_line = pin % EIC_LINES_PER_PORT;
@@ -247,6 +247,14 @@ static uint8_t find_eic_line_from_pin(int port, int pin)
 {
 	uint8_t eic_line = pin % EIC_LINES_PER_PORT;
 	uint32_t pin_mask = BIT(pin);
+
+	/* Check if this is an NMI pin first */
+	if (is_nmi_pin(port, pin)) {
+		return EIC_LINE_NMI;
+	}
+
+	/* Convert port ID to port index for secure GPIO ports */
+	port = GET_PORT_IDX(port);
 
 	switch (port) {
 	case MCHP_PORT_ID0:
